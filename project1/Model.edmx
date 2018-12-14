@@ -1,0 +1,593 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="BooksSet" EntityType="Model.Store.BooksSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AuthorSet" EntityType="Model.Store.AuthorSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BookExemplarSet" EntityType="Model.Store.BookExemplarSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GenreSet" EntityType="Model.Store.GenreSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CitySet" EntityType="Model.Store.CitySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StoreSet" EntityType="Model.Store.StoreSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SeriesSet" EntityType="Model.Store.SeriesSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CountrySet" EntityType="Model.Store.CountrySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PrivelegeSet" EntityType="Model.Store.PrivelegeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserSet" EntityType="Model.Store.UserSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="BooksAuthor" Association="Model.Store.BooksAuthor">
+      <End Role="Books" EntitySet="BooksSet" />
+      <End Role="Author" EntitySet="AuthorSet" />
+    </AssociationSet>
+    <AssociationSet Name="BooksGenre" Association="Model.Store.BooksGenre">
+      <End Role="Books" EntitySet="BooksSet" />
+      <End Role="Genre" EntitySet="GenreSet" />
+    </AssociationSet>
+    <AssociationSet Name="BooksBookExemplar" Association="Model.Store.BooksBookExemplar">
+      <End Role="Books" EntitySet="BooksSet" />
+      <End Role="BookExemplar" EntitySet="BookExemplarSet" />
+    </AssociationSet>
+    <AssociationSet Name="SeriesBookExemplar" Association="Model.Store.SeriesBookExemplar">
+      <End Role="Series" EntitySet="SeriesSet" />
+      <End Role="BookExemplar" EntitySet="BookExemplarSet" />
+    </AssociationSet>
+    <AssociationSet Name="StoreBookExemplar" Association="Model.Store.StoreBookExemplar">
+      <End Role="Store" EntitySet="StoreSet" />
+      <End Role="BookExemplar" EntitySet="BookExemplarSet" />
+    </AssociationSet>
+    <AssociationSet Name="CityStore" Association="Model.Store.CityStore">
+      <End Role="City" EntitySet="CitySet" />
+      <End Role="Store" EntitySet="StoreSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserPrivelege" Association="Model.Store.UserPrivelege">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Privelege" EntitySet="PrivelegeSet" />
+    </AssociationSet>
+    <AssociationSet Name="CountryAuthor" Association="Model.Store.CountryAuthor">
+      <End Role="Country" EntitySet="CountrySet" />
+      <End Role="Author" EntitySet="AuthorSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="BooksSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Author_Id" Type="int" Nullable="false" />
+    <Property Name="Genre_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AuthorSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SecondName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Country1_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookExemplarSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="Books_Id" Type="int" Nullable="false" />
+    <Property Name="Series_Id" Type="int" Nullable="false" />
+    <Property Name="Store_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GenreSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="CitySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StoreSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="City_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SeriesSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CoverType" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="CountrySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PrivelegeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Available" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PrivelegeId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="BooksAuthor">
+    <End Role="Books" Type="Model.Store.BooksSet" Multiplicity="*" />
+    <End Role="Author" Type="Model.Store.AuthorSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Books">
+        <PropertyRef Name="Author_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BooksGenre">
+    <End Role="Books" Type="Model.Store.BooksSet" Multiplicity="*" />
+    <End Role="Genre" Type="Model.Store.GenreSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Genre">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Books">
+        <PropertyRef Name="Genre_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BooksBookExemplar">
+    <End Role="Books" Type="Model.Store.BooksSet" Multiplicity="1" />
+    <End Role="BookExemplar" Type="Model.Store.BookExemplarSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Books">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookExemplar">
+        <PropertyRef Name="Books_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SeriesBookExemplar">
+    <End Role="Series" Type="Model.Store.SeriesSet" Multiplicity="1" />
+    <End Role="BookExemplar" Type="Model.Store.BookExemplarSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Series">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookExemplar">
+        <PropertyRef Name="Series_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StoreBookExemplar">
+    <End Role="Store" Type="Model.Store.StoreSet" Multiplicity="1" />
+    <End Role="BookExemplar" Type="Model.Store.BookExemplarSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookExemplar">
+        <PropertyRef Name="Store_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CityStore">
+    <End Role="City" Type="Model.Store.CitySet" Multiplicity="1" />
+    <End Role="Store" Type="Model.Store.StoreSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Store">
+        <PropertyRef Name="City_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserPrivelege">
+    <End Role="User" Type="Model.Store.UserSet" Multiplicity="*" />
+    <End Role="Privelege" Type="Model.Store.PrivelegeSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Privelege">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="PrivelegeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CountryAuthor">
+    <End Role="Country" Type="Model.Store.CountrySet" Multiplicity="1" />
+    <End Role="Author" Type="Model.Store.AuthorSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Author">
+        <PropertyRef Name="Country1_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BooksSet" EntityType="Model.Books" />
+          <EntitySet Name="AuthorSet" EntityType="Model.Author" />
+          <EntitySet Name="BookExemplarSet" EntityType="Model.BookExemplar" />
+          <EntitySet Name="GenreSet" EntityType="Model.Genre" />
+          <EntitySet Name="CitySet" EntityType="Model.City" />
+          <EntitySet Name="StoreSet" EntityType="Model.Store" />
+          <EntitySet Name="SeriesSet" EntityType="Model.Series" />
+          <EntitySet Name="CountrySet" EntityType="Model.Country" />
+          <EntitySet Name="PrivelegeSet" EntityType="Model.Privelege" />
+          <EntitySet Name="UserSet" EntityType="Model.User" />
+          <AssociationSet Name="BooksAuthor" Association="Model.BooksAuthor">
+            <End Role="Books" EntitySet="BooksSet" />
+            <End Role="Author" EntitySet="AuthorSet" />
+          </AssociationSet>
+          <AssociationSet Name="BooksGenre" Association="Model.BooksGenre">
+            <End Role="Books" EntitySet="BooksSet" />
+            <End Role="Genre" EntitySet="GenreSet" />
+          </AssociationSet>
+          <AssociationSet Name="BooksBookExemplar" Association="Model.BooksBookExemplar">
+            <End Role="Books" EntitySet="BooksSet" />
+            <End Role="BookExemplar" EntitySet="BookExemplarSet" />
+          </AssociationSet>
+          <AssociationSet Name="SeriesBookExemplar" Association="Model.SeriesBookExemplar">
+            <End Role="Series" EntitySet="SeriesSet" />
+            <End Role="BookExemplar" EntitySet="BookExemplarSet" />
+          </AssociationSet>
+          <AssociationSet Name="StoreBookExemplar" Association="Model.StoreBookExemplar">
+            <End Role="Store" EntitySet="StoreSet" />
+            <End Role="BookExemplar" EntitySet="BookExemplarSet" />
+          </AssociationSet>
+          <AssociationSet Name="CityStore" Association="Model.CityStore">
+            <End Role="City" EntitySet="CitySet" />
+            <End Role="Store" EntitySet="StoreSet" />
+          </AssociationSet>
+          <AssociationSet Name="UserPrivelege" Association="Model.UserPrivelege">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Privelege" EntitySet="PrivelegeSet" />
+          </AssociationSet>
+          <AssociationSet Name="CountryAuthor" Association="Model.CountryAuthor">
+            <End Role="Country" EntitySet="CountrySet" />
+            <End Role="Author" EntitySet="AuthorSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <NavigationProperty Name="Author" Relationship="Model.BooksAuthor" FromRole="Books" ToRole="Author" />
+          <NavigationProperty Name="Genre" Relationship="Model.BooksGenre" FromRole="Books" ToRole="Genre" />
+          <NavigationProperty Name="BookExemplar" Relationship="Model.BooksBookExemplar" FromRole="Books" ToRole="BookExemplar" />
+        </EntityType>
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Surname" Type="String" Nullable="false" />
+          <Property Name="SecondName" Type="String" Nullable="true" />
+          <NavigationProperty Name="Books" Relationship="Model.BooksAuthor" FromRole="Author" ToRole="Books" />
+          <NavigationProperty Name="Country1" Relationship="Model.CountryAuthor" FromRole="Author" ToRole="Country" />
+        </EntityType>
+        <EntityType Name="BookExemplar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Books" Relationship="Model.BooksBookExemplar" FromRole="BookExemplar" ToRole="Books" />
+          <NavigationProperty Name="Series" Relationship="Model.SeriesBookExemplar" FromRole="BookExemplar" ToRole="Series" />
+          <NavigationProperty Name="Store" Relationship="Model.StoreBookExemplar" FromRole="BookExemplar" ToRole="Store" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <NavigationProperty Name="Books" Relationship="Model.BooksGenre" FromRole="Genre" ToRole="Books" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Store" Relationship="Model.CityStore" FromRole="City" ToRole="Store" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="true" />
+          <NavigationProperty Name="BookExemplar" Relationship="Model.StoreBookExemplar" FromRole="Store" ToRole="BookExemplar" />
+          <NavigationProperty Name="City" Relationship="Model.CityStore" FromRole="Store" ToRole="City" />
+        </EntityType>
+        <EntityType Name="Series">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="CoverType" Type="String" Nullable="true" />
+          <NavigationProperty Name="BookExemplar" Relationship="Model.SeriesBookExemplar" FromRole="Series" ToRole="BookExemplar" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Author" Relationship="Model.CountryAuthor" FromRole="Country" ToRole="Author" />
+        </EntityType>
+        <EntityType Name="Privelege">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Available" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Model.UserPrivelege" FromRole="Privelege" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <NavigationProperty Name="Privelege" Relationship="Model.UserPrivelege" FromRole="User" ToRole="Privelege" />
+          <Property Name="PrivelegeId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="BooksAuthor">
+          <End Type="Model.Books" Role="Books" Multiplicity="*" />
+          <End Type="Model.Author" Role="Author" Multiplicity="1" />
+        </Association>
+        <Association Name="BooksGenre">
+          <End Type="Model.Books" Role="Books" Multiplicity="*" />
+          <End Type="Model.Genre" Role="Genre" Multiplicity="1" />
+        </Association>
+        <Association Name="BooksBookExemplar">
+          <End Type="Model.Books" Role="Books" Multiplicity="1" />
+          <End Type="Model.BookExemplar" Role="BookExemplar" Multiplicity="*" />
+        </Association>
+        <Association Name="SeriesBookExemplar">
+          <End Type="Model.Series" Role="Series" Multiplicity="1" />
+          <End Type="Model.BookExemplar" Role="BookExemplar" Multiplicity="*" />
+        </Association>
+        <Association Name="StoreBookExemplar">
+          <End Type="Model.Store" Role="Store" Multiplicity="1" />
+          <End Type="Model.BookExemplar" Role="BookExemplar" Multiplicity="*" />
+        </Association>
+        <Association Name="CityStore">
+          <End Type="Model.City" Role="City" Multiplicity="1" />
+          <End Type="Model.Store" Role="Store" Multiplicity="*" />
+        </Association>
+        <Association Name="UserPrivelege">
+          <End Type="Model.User" Role="User" Multiplicity="*" />
+          <End Type="Model.Privelege" Role="Privelege" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Privelege">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="PrivelegeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CountryAuthor">
+          <End Type="Model.Country" Role="Country" Multiplicity="1" />
+          <End Type="Model.Author" Role="Author" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ModelContainer">
+    <EntitySetMapping Name="BooksSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Books)">
+        <MappingFragment StoreEntitySet="BooksSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuthorSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Author)">
+        <MappingFragment StoreEntitySet="AuthorSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookExemplarSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.BookExemplar)">
+        <MappingFragment StoreEntitySet="BookExemplarSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GenreSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Genre)">
+        <MappingFragment StoreEntitySet="GenreSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CitySet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.City)">
+        <MappingFragment StoreEntitySet="CitySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StoreSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Store)">
+        <MappingFragment StoreEntitySet="StoreSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SeriesSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Series)">
+        <MappingFragment StoreEntitySet="SeriesSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CoverType" ColumnName="CoverType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CountrySet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Country)">
+        <MappingFragment StoreEntitySet="CountrySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrivelegeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Privelege)">
+        <MappingFragment StoreEntitySet="PrivelegeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Available" ColumnName="Available" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.User)">
+        <MappingFragment StoreEntitySet="UserSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PrivelegeId" ColumnName="PrivelegeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="BooksAuthor" TypeName="Model.BooksAuthor" StoreEntitySet="BooksSet">
+      <EndProperty Name="Author">
+        <ScalarProperty Name="Id" ColumnName="Author_Id" />
+      </EndProperty>
+      <EndProperty Name="Books">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BooksGenre" TypeName="Model.BooksGenre" StoreEntitySet="BooksSet">
+      <EndProperty Name="Genre">
+        <ScalarProperty Name="Id" ColumnName="Genre_Id" />
+      </EndProperty>
+      <EndProperty Name="Books">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BooksBookExemplar" TypeName="Model.BooksBookExemplar" StoreEntitySet="BookExemplarSet">
+      <EndProperty Name="Books">
+        <ScalarProperty Name="Id" ColumnName="Books_Id" />
+      </EndProperty>
+      <EndProperty Name="BookExemplar">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SeriesBookExemplar" TypeName="Model.SeriesBookExemplar" StoreEntitySet="BookExemplarSet">
+      <EndProperty Name="Series">
+        <ScalarProperty Name="Id" ColumnName="Series_Id" />
+      </EndProperty>
+      <EndProperty Name="BookExemplar">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="StoreBookExemplar" TypeName="Model.StoreBookExemplar" StoreEntitySet="BookExemplarSet">
+      <EndProperty Name="Store">
+        <ScalarProperty Name="Id" ColumnName="Store_Id" />
+      </EndProperty>
+      <EndProperty Name="BookExemplar">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CityStore" TypeName="Model.CityStore" StoreEntitySet="StoreSet">
+      <EndProperty Name="City">
+        <ScalarProperty Name="Id" ColumnName="City_Id" />
+      </EndProperty>
+      <EndProperty Name="Store">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CountryAuthor" TypeName="Model.CountryAuthor" StoreEntitySet="AuthorSet">
+      <EndProperty Name="Country">
+        <ScalarProperty Name="Id" ColumnName="Country1_Id" />
+      </EndProperty>
+      <EndProperty Name="Author">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
